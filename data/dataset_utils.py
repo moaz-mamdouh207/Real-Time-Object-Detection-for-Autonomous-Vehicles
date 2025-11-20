@@ -86,7 +86,7 @@ def process_split(items, img_dir, output_folder, split, class_map):
     img_output_dir = os.path.join(output_folder, "images", split)
     lbl_output_dir = os.path.join(output_folder, "labels", split)
 
-    for item in tqdm(items, desc=f"Processing {img_output_dir.name}"):
+    for item in tqdm(items, desc=f"Processing {split}"):
         img_name = item['name']
         img_path = img_dir / img_name
         if not img_path.exists():

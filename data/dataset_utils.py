@@ -127,9 +127,9 @@ def create_yaml(output_dir, class_names):
         class_names (list): List of class names.
     """
     yaml_content = f"""
-                    train: {output_dir}/images/train
-                    val: {output_dir}/images/val
-                    test: {output_dir}/images/test
+                    train: /images/train
+                    val: /images/val
+                    test: /images/test
 
                     nc: {len(class_names)}  
                     names: {class_names}

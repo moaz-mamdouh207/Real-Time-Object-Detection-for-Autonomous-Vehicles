@@ -6,6 +6,7 @@ from tqdm import tqdm
 import cv2
 import shutil
 
+
 def Create_output_directories(output_folder):
     """
     Create the directory structure for YOLO dataset splits.
@@ -83,8 +84,8 @@ def process_split(items, img_dir, output_folder, split, class_map):
         split: split name.
         class_map (dict): Mapping of category names to class IDs.
     """
-    img_output_dir = os.path.join(output_folder, "images", split)
-    lbl_output_dir = os.path.join(output_folder, "labels", split)
+    img_output_dir = output_folder/"images"/split
+    lbl_output_dir = output_folder/"labels"/split
 
     for item in tqdm(items, desc=f"Processing {split}"):
         img_name = item['name']

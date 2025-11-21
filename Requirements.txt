@@ -1,0 +1,6 @@
+opencv-python
+numpy
+flask
+ultralytics
+tqdm
+optuna

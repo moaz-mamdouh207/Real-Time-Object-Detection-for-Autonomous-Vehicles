@@ -9,27 +9,27 @@ All notebooks are designed to run on **Kaggle Notebooks**, which provides GPU su
 
 ## Folder Structure
 
-Real-Time-Object-Detection-for-Autonomous-Vehicles/
-│
-├── Data/
-│ ├── bdd-in-yolo-fromat.ipynb # Notebook to convert BDD dataset annotations to YOLO format (run on Kaggle)
-│ ├── dataset_utils.py # Utility functions used in data preprocessing
-│
-├── Deployment/
-│ ├── YOLOV8s_best.onnx # Trained YOLOv8 model in ONNX format for deployment
-│ ├── app.py # Flask web app for real-time object detection
-│
-├── Model/
-│ ├── Visualization output/ # Folder containing visualization outputs
-│ │ ├── image.png # Sample predicted image
-│ │ └── Video.mp4 # Sample predicted video
-│ │
-│ ├── train.py # Training helper functions
-│ ├── training experiment.ipynb # Notebook for model training and hyperparameter tuning using Optuna (run on Kaggle)
-│ ├── visualization.ipynb # Notebook for predicting and visualizing objects on images and videos (run on Kaggle)
-│ ├── YOLOV8s_best.pt # Trained YOLOv8 PyTorch model
-│
-├── requirements.txt # Python dependencies
+Real-Time-Object-Detection-for-Autonomous-Vehicles/  
+│  
+├── Data/  
+│ ├── bdd-in-yolo-fromat.ipynb # Notebook to convert BDD dataset annotations to YOLO format (run on Kaggle)  
+│ ├── dataset_utils.py # Utility functions used in data preprocessing  
+│  
+├── Deployment/  
+│ ├── YOLOV8s_best.onnx # Trained YOLOv8 model in ONNX format for deployment  
+│ ├── app.py # Flask web app for real-time object detection  
+│  
+├── Model/  
+│ ├── Visualization output/ # Folder containing visualization outputs  
+│ │ ├── image.png # Sample predicted image  
+│ │ └── Video.mp4 # Sample predicted video  
+│ │  
+│ ├── train.py # Training helper functions  
+│ ├── training experiment.ipynb # Notebook for model training and hyperparameter tuning using Optuna (run on Kaggle)  
+│ ├── visualization.ipynb # Notebook for predicting and visualizing objects on images and videos (run on Kaggle)  
+│ ├── YOLOV8s_best.pt # Trained YOLOv8 PyTorch model  
+│  
+├── requirements.txt # Python dependencies  
 
 
 ---
@@ -54,14 +54,14 @@ Real-Time-Object-Detection-for-Autonomous-Vehicles/
 
 ## Installation
 
-1. Clone the repository:
-    git clone <repository_url>
-    cd my_repo
+1. Clone the repository:  
+    git clone <repository_url>  
+    cd my_repo  
 
-2. Create a virtual environment (optional but recommended):
-    python -m venv venv
-    source venv/bin/activate      # On Windows use `venv\Scripts\activate`
+2. Create a virtual environment (optional but recommended):  
+    python -m venv venv  
+    source venv/bin/activate      # On Windows use `venv\Scripts\activate`  
 
-3. Install dependencies:
+3. Install dependencies:  
     pip install -r requirements.txt
-    Note: Notebooks are designed to run on Kaggle, which comes with pre-installed packages and GPU support. Use a local environment mainly for deployment.
+    Note: Notebooks are designed to run on Kaggle, which comes with pre-installed packages and GPU support. Use a local environment mainly for deployment.  

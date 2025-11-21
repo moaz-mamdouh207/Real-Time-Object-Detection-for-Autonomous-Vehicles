@@ -26,7 +26,7 @@ def train_yolo(model_name, lr0, batch_size, epochs, img_size):
     return mAP50_95
 
 
-def objective(trial, model_name):
+def objective(trial, model_name, epochs):
     lr0 = trial.suggest_loguniform('lr0', 1e-4, 1e-1)
     batch_size = trial.suggest_categorical('batch_size', [8, 16, 32])
     img_size = trial.suggest_categorical('img_size', [320, 416, 512, 640])
@@ -36,14 +36,14 @@ def objective(trial, model_name):
         lr0=lr0,
         batch_size=batch_size,
         img_size=img_size,
-        epochs=30
+        epochs=epochs
     )
     return mAP
 
 
-def optimize(model, n_trials):
+def optimize(model, n_trials, epochs):
         study = optuna.create_study(direction='maximize')
-        study.optimize(lambda trial: objective(trial, model_name=model), n_trials=n_trials)
+        study.optimize(lambda trial: objective(trial, model_name=model, epochs=epochs), n_trials=n_trials)
         return study.best_params
 
 

@@ -1,67 +1,91 @@
-# Autonomous Driving Object Detection
+# Autonomous Driving Object Detection with YOLOv8
 
-## Project Overview
-This project focuses on **object detection for autonomous driving** using **YOLOv8**. The goal is to detect vehicles, pedestrians, traffic signs, and other relevant objects in real-time to facilitate autonomous navigation. The project includes **data preprocessing, model training and fine-tuning, visualization, and deployment** via a Flask web application.  
+This project implements a real-time object detection system for autonomous driving applications using YOLOv8s trained on the BDD100K dataset. The system can detect various objects commonly encountered in driving scenarios and provides a web interface for easy interaction.
 
-All notebooks are designed to run on **Kaggle Notebooks**, which provides GPU support for faster training and inference.
+## 🚀 Project Overview
 
----
+This object detection system is specifically designed for autonomous driving scenarios, capable of identifying vehicles, pedestrians, traffic signs, and other relevant objects in diverse environmental conditions.
 
-## Folder Structure
+### Key Features
+- **Real-time object detection** for autonomous driving
+- **Web-based interface** for easy testing and demonstration
+- **Diverse weather and time condition handling**
+- **Optimized for performance** with YOLOv8s architecture
+- **Containerized deployment** with Docker
 
-Real-Time-Object-Detection-for-Autonomous-Vehicles/  
-│  
-├── Data/  
-│ ├── bdd-in-yolo-fromat.ipynb # Notebook to convert BDD dataset annotations to YOLO format (run on Kaggle)  
-│ ├── dataset_utils.py # Utility functions used in data preprocessing  
-│  
-├── Deployment/  
-│ ├── YOLOV8s_best.onnx # Trained YOLOv8 model in ONNX format for deployment  
-│ ├── app.py # Flask web app for real-time object detection  
-│  
-├── Model/  
-│ ├── Visualization output/ # Folder containing visualization outputs  
-│ │ ├── image.png # Sample predicted image  
-│ │ └── Video.mp4 # Sample predicted video  
-│ │  
-│ ├── train.py # Training helper functions  
-│ ├── training experiment.ipynb # Notebook for model training and hyperparameter tuning using Optuna (run on Kaggle)  
-│ ├── visualization.ipynb # Notebook for predicting and visualizing objects on images and videos (run on Kaggle)  
-│ ├── YOLOV8s_best.pt # Trained YOLOv8 PyTorch model  
-│  
-├── requirements.txt # Python dependencies  
+## 📊 Model & Dataset
+
+### Model: YOLOv8s
+- **Why YOLOv8s?** - Excellent balance between speed and accuracy, making it ideal for real-time autonomous driving applications
+- **Architecture** - Optimized small version of YOLOv8 with high efficiency
+- **Performance** - Suitable for deployment on edge devices with limited computational resources
+
+### Dataset: BDD100K
+- **Why BDD100K?** - Contains diverse driving scenarios across different:
+  - **Time zones** (day, night, dawn, dusk)
+  - **Weather conditions** (sunny, rainy, snowy, foggy)
+  - **Geographic locations**
+  - **Driving scenarios** (highway, urban, residential)
+
+## 📈 Model Performance
+
+training metrics:
+Box Loss: 1.32682
+Classification Loss: 0.80327
+Distribution Focal Loss: 1.03117
+Precision: 0.70327
+Recall: 0.49147
+mAP@0.5: 0.5508
+mAP@0.5:0.95: 0.31659
+
+## 🗂️ repo Structure
+├── train/ # Training scripts and utilities
+│ ├── stage1.ipynb # Initial training stage
+│ ├── stage2.ipynb # Fine-tuning stage
+│ └── train_utils.py # Training utilities and functions
+├── web_page/ # Web application
+│ ├── model/
+│ │ └── final.pt # Trained YOLOv8s model
+│ ├── templates/
+│ │ └── index.html # Web interface
+│ ├── uploads/ # Directory for uploaded images
+│ ├── app.py # Flask application
+│ ├── Dockerfile # Container configuration
+│ └── requirements.txt # Python dependencies
+├── data/ # Data processing
+│ ├── bdd-in-yolo-format.ipynb # Dataset conversion notebook
+│ ├── data_utils/ # Data processing utilities
+│ └── data_config.py # Dataset configuration and class names
+└── requirements.txt # Main project dependencies
 
 
----
+## Installation & Setup
 
-## Key Components
+### Prerequisites
+- Python 3.8+
+- Kaggle environment (for training notebooks)
+- Docker (for deployment)
 
-### 1. Data Preprocessing
-- **bdd-in-yolo-fromat.ipynb**: Converts BDD dataset labels into YOLO format. Designed for Kaggle notebooks for easy GPU usage.
-- **dataset_utils.py**: Contains helper functions for data conversion and preprocessing.
+### Local Installation
 
-### 2. Model Training & Visualization
-- **training experiment.ipynb**: Notebook for training YOLOv8 with Optuna for hyperparameter optimization. Run on Kaggle for GPU acceleration.
-- **train.py**: Helper functions used in the training notebook.
-- **visualization.ipynb**: Runs inference on images and videos and visualizes bounding boxes. Run on Kaggle for GPU acceleration.
-- **Visualization output/**: Contains sample outputs for quick reference.
+1. **Clone the repository**
+    git clone <repository-url>
+    cd autonomous-driving-object-detection
 
-### 3. Deployment
-- **app.py**: Flask-based web application for deploying the trained YOLOv8 model locally or on a server.
-- **YOLOV8s_best.onnx**: Exported model in ONNX format for fast inference during deployment.
-
----
-
-## Installation
-
-1. Clone the repository:  
-    git clone <repository_url>  
-    cd my_repo  
-
-2. Create a virtual environment (optional but recommended):  
-    python -m venv venv  
-    source venv/bin/activate      # On Windows use `venv\Scripts\activate`  
-
-3. Install dependencies:  
+2. **Install dependencies**
     pip install -r requirements.txt
-    Note: Notebooks are designed to run on Kaggle, which comes with pre-installed packages and GPU support. Use a local environment mainly for deployment.  
+
+3. **Run the web application**
+    cd web_page
+    python app.py
+
+## Docker Deployment
+1. **Build the Docker image**
+    cd web_page
+    docker build -t autonomous-driving-detection .
+
+2. **Run the container**
+    docker run -p 5000:5000 autonomous-driving-detection
+
+3. **Access the application**
+    Open your browser and navigate to http://localhost:5000

@@ -1,0 +1,13 @@
+classes = {
+    0:"bike",
+    1:"bus",
+    2:"car",
+    3:"motor",
+    4:"person",
+    5:"rider",
+    6:"traffic light",
+    7:"traffic sign",
+    8:"train",
+    9:"truck"
+}
+

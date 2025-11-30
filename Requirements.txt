@@ -3,4 +3,3 @@ numpy
 flask
 ultralytics
 tqdm
-optuna

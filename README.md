@@ -69,7 +69,7 @@ mAP@0.5:0.95: 0.31659
 ### Local Installation
 
 1. **Clone the repository**
-    git clone <repository-url>
+    git clone https://github.com/moaz-mamdouh207/Real-Time-Object-Detection-for-Autonomous-Vehicles
     cd autonomous-driving-object-detection
 
 2. **Install dependencies**

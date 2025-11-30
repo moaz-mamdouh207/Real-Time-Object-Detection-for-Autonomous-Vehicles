@@ -39,24 +39,24 @@ mAP@0.5: 0.5508
 mAP@0.5:0.95: 0.31659
 
 ## 🗂️ repo Structure
-├── train/ # Training scripts and utilities
-│ ├── stage1.ipynb # Initial training stage
-│ ├── stage2.ipynb # Fine-tuning stage
-│ └── train_utils.py # Training utilities and functions
-├── web_page/ # Web application
-│ ├── model/
-│ │ └── final.pt # Trained YOLOv8s model
-│ ├── templates/
-│ │ └── index.html # Web interface
-│ ├── uploads/ # Directory for uploaded images
-│ ├── app.py # Flask application
-│ ├── Dockerfile # Container configuration
-│ └── requirements.txt # Python dependencies
-├── data/ # Data processing
-│ ├── bdd-in-yolo-format.ipynb # Dataset conversion notebook
-│ ├── data_utils/ # Data processing utilities
-│ └── data_config.py # Dataset configuration and class names
-└── requirements.txt # Main project dependencies
+├── train/ # Training scripts and utilities  
+│ ├── stage1.ipynb # Initial training stage  
+│ ├── stage2.ipynb # Fine-tuning stage  
+│ └── train_utils.py # Training utilities and functions  
+├── web_page/ # Web application  
+│ ├── model/  
+│ │ └── final.pt # Trained YOLOv8s model  
+│ ├── templates/  
+│ │ └── index.html # Web interface  
+│ ├── uploads/ # Directory for uploaded images  
+│ ├── app.py # Flask application  
+│ ├── Dockerfile # Container configuration  
+│ └── requirements.txt # Python dependencies  
+├── data/ # Data processing  
+│ ├── bdd-in-yolo-format.ipynb # Dataset conversion notebook  
+│ ├── data_utils/ # Data processing utilities  
+│ └── data_config.py # Dataset configuration and class names  
+└── requirements.txt # Main project dependencies  
 
 
 ## Installation & Setup

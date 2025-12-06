@@ -1,91 +1,68 @@
-# Autonomous Driving Object Detection with YOLOv8
+# Autonomous Driving Object Detection System
 
-This project implements a real-time object detection system for autonomous driving applications using YOLOv8s trained on the BDD100K dataset. The system can detect various objects commonly encountered in driving scenarios and provides a web interface for easy interaction.
+An object detection system specifically designed for autonomous driving scenarios, capable of identifying vehicles, pedestrians, traffic signs, and other relevant objects in diverse environmental conditions. The system uses **YOLOv8s** for its small size and high speed, making it suitable for real-time applications and edge devices.
 
-## 🚀 Project Overview
+---
 
-This object detection system is specifically designed for autonomous driving scenarios, capable of identifying vehicles, pedestrians, traffic signs, and other relevant objects in diverse environmental conditions.
+## 🗂 Repository Structure
 
-### Key Features
-- **Real-time object detection** for autonomous driving
-- **Web-based interface** for easy testing and demonstration
-- **Diverse weather and time condition handling**
-- **Optimized for performance** with YOLOv8s architecture
-- **Containerized deployment** with Docker
-
-## 📊 Model & Dataset
-
-### Model: YOLOv8s
-- **Why YOLOv8s?** - Excellent balance between speed and accuracy, making it ideal for real-time autonomous driving applications
-- **Architecture** - Optimized small version of YOLOv8 with high efficiency
-- **Performance** - Suitable for deployment on edge devices with limited computational resources
-
-### Dataset: BDD100K
-- **Why BDD100K?** - Contains diverse driving scenarios across different:
-  - **Time zones** (day, night, dawn, dusk)
-  - **Weather conditions** (sunny, rainy, snowy, foggy)
-  - **Geographic locations**
-  - **Driving scenarios** (highway, urban, residential)
-
-## 📈 Model Performance
-
-training metrics:
-Box Loss: 1.32682
-Classification Loss: 0.80327
-Distribution Focal Loss: 1.03117
-Precision: 0.70327
-Recall: 0.49147
-mAP@0.5: 0.5508
-mAP@0.5:0.95: 0.31659
-
-## 🗂️ repo Structure
-├── train/ # Training scripts and utilities  
-│ ├── stage1.ipynb # Initial training stage  
-│ ├── stage2.ipynb # Fine-tuning stage  
-│ └── train_utils.py # Training utilities and functions  
-├── web_page/ # Web application  
-│ ├── model/  
-│ │ └── final.pt # Trained YOLOv8s model  
-│ ├── templates/  
-│ │ └── index.html # Web interface  
-│ ├── uploads/ # Directory for uploaded images  
-│ ├── app.py # Flask application  
-│ ├── Dockerfile # Container configuration  
-│ └── requirements.txt # Python dependencies  
-├── data/ # Data processing  
-│ ├── bdd-in-yolo-format.ipynb # Dataset conversion notebook  
-│ ├── data_utils/ # Data processing utilities  
-│ └── data_config.py # Dataset configuration and class names  
-└── requirements.txt # Main project dependencies  
+![Error](Repo_structure.png)
 
 
-## Installation & Setup
 
-### Prerequisites
-- Python 3.8+
-- Kaggle environment (for training notebooks)
-- Docker (for deployment)
+---
 
-### Local Installation
+## 📦 Dataset Preparation
 
-1. **Clone the repository**
-    git clone https://github.com/moaz-mamdouh207/Real-Time-Object-Detection-for-Autonomous-Vehicles
-    cd autonomous-driving-object-detection
+The **BDD100K** dataset is used for training. Since the original dataset is not YOLO-ready, custom functions were implemented:
 
-2. **Install dependencies**
-    pip install -r requirements.txt
+1. **Dataset Reorganization**  
+   - Scan raw files and identify images and labels  
+   - Create a clean folder structure  
+   - Copy files to correct locations  
+   - Separate images by time of day (day, night, dawn & dusk)  
 
-3. **Run the web application**
-    cd web_page
-    python app.py
+2. **Train/Validation/Test Split**  
+   - Shuffle the dataset to avoid bias  
+   - Split into train, validation, and test sets  
+   - Ensure images and matching labels remain paired  
 
-## Docker Deployment
-1. **Build the Docker image**
-    cd web_page
-    docker build -t autonomous-driving-detection .
+3. **BDD100K JSON → YOLO Conversion**  
+   - Load JSON annotations  
+   - Map categories to YOLO class IDs  
+   - Convert bounding boxes to YOLO format `(class_id x_center y_center width height)`  
+   - Save `.txt` labels matching image filenames  
 
-2. **Run the container**
-    docker run -p 5000:5000 autonomous-driving-detection
+**Kaggle Notebook:** [View on Kaggle](https://www.kaggle.com/code/moazmamdouh205/depi-cleaning/edit)
 
-3. **Access the application**
-    Open your browser and navigate to http://localhost:5000
+---
+
+## 🏋️ Training
+
+Training is split into **two stages** to handle dataset size and class imbalance:
+
+### Stage 1
+- Train YOLOv8s on a **balanced subset** of the dataset to learn unbiased features.  
+- The best checkpoint from this stage is used for Stage 2.  
+
+### Stage 2
+- Fine-tune the Stage 1 model on the **full dataset**, applying augmentations to improve robustness and fix class imbalance.  
+
+**Training Utilities:** `train_utils.py` – contains helper functions for dataset sampling and preprocessing.  
+
+---
+
+## 🌐 Web Application
+
+A web interface allows users to upload a video, process it through the trained model, and view the output with detected objects highlighted.  
+
+- **Docker Port:** 5000  
+- **Setup:**  
+```bash
+git clone <repo_url>
+cd web_app
+docker build -t autonomous-detection .
+docker run -p 5000:5000 autonomous-detection
+
+
+
